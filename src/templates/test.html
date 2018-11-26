@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+<form action ="/" method="get">
+		<button type="submit" value="submit">REINICIAR LISTAS</button>
+	</form>
+
+	<h1>Lista Comics</h1>
+	<form class="form-horizontal" role="form" action="/ordenFecha"
+		method="get">
+		<button>Orden Fecha</button>
+	</form>
+	<span style="margin-right: 10px;"></span>
+	<form class="form-horizontal" role="form" action="/buscarNumEntregas"
+		method="get">
+		<button>Orden Numero Entregas</button>
+	</form>
+	<h3>Buscar Por Fecha</h3>
+	<form class="form-inline" role="form" action="/buscarFechaMayor"
+		method="get">
+		<input type="date" class="form-control" name="busquedaFechaMayor"
+			id="busquedaFechaMayor" placeholder="fecha"></input>
+		<button type="submit" value="submit">Buscar</button>
+	</form>
+	<h3>Buscar Por Nombre</h3>
+	<form class="form-inline" role="form" action="/buscarNombre"
+		method="get">
+		<input type="text" name="busquedaNombre" id="busquedaNombre"
+			placeholder="nombre"></input>
+		<button type="submit" value="submit">Buscar</button>
+	</form>
+	<table class="table">
+		<thead>
+			<tr>
+				<th>id</th>
+				<th>Nombre</th>
+				<th>Descripcion</th>
+				<th>Fecha de creacion</th>
+				<th>Nº Entregas</th>
+			<tr>
+		</thead>
+		<tbody>
+			{% for comic in listaComic %}
+			<tr>
+				<td>{{ comic.idComic }}</td>
+				<td>{{ comic.nombre }}</td>
+				<td>{{ comic.descripcion }}</td>
+				<td>{{ comic.fechaCreacion.strftime('%Y-%m-%d') }}</td>
+				<td>{{ comic.listaEntrega|length}}</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+	<h1>Añadir Comic</h1>
+	<form role="form" action="/nuevoComic" method="post">
+		<label for="inputText"> Nombre:</label> <input type="text"
+			class="form-control" name="nombreComic" id="nombreComic"
+			placeholder="nombre" required> <label for="inputText">Descripci&oacuten:</label>
+		<input type="text" class="form-control" name="descripcionComic"
+			id="descripcionComic" placeholder="descripcion" required>
+		<button type="submit" value="submit" class="btn btn-success">Crear</button>
+	</form>
+
+	<h1>Editar Comic</h1>
+	<form role="form" action="/editarComic" method="post">
+		<label for="inputText"> Id:</label> <input type="text"
+			class="form-control" placeholder="idComic" name="idComic"
+			id="idComic" required> <label for="inputText">
+			Nombre:</label> <input type="text" class="form-control" name="nombreComic"
+			id="nombreComic" placeholder="nombre" required> <label
+			for="inputText">Descripci&oacuten:</label> <input type="text"
+			class="form-control" name="descripcionComic" id="descripcionComic"
+			placeholder="descripcion" required>
+		<button type="submit" value="submit" class="btn btn-success">Editar</button>
+	</form>
+
+	<h1>Eliminar</h1>
+	<form role="form" action="/eliminarComic" method="get">
+		<label for="inputText"> Id:</label> <input type="text"
+			class="form-control" placeholder="idComic" name="idComic"
+			id="idComic" required>
+		<button type="submit" value="submit" class="btn btn-success">Eliminar</button>
+	</form>
+	<hr />
+	<hr />
+	<h1>Lista Entregas</h1>
+	
+	
+	<form class="form-inline" role="form"
+					action="/buscarFechaMayorEntrega" method="get">
+			<label for="inputText">IdComic:</label> <input type="text"
+				class="form-control" placeholder="idComic" name="idComic"
+				id="idComic" required> 		
+			<input type="date" class="form-control"
+				name="busquedaFechaMayorEntrega" id="busquedaFechaMayorEntrega"
+				placeholder="fecha">
+				<button type="submit" value="submit">Buscar por Fecha Mayor que</button>
+	</form>
+	
+	
+	
+	<div>
+		<form class="form-horizontal" role="form"
+			action="/ordenFechaEntrega"
+			method="get">
+			<label for="inputText"> IdComic:</label> <input type="text"
+				class="form-control" placeholder="idComic" name="idComic"
+				id="idComic" required> 
+				<button>Ordena por Antig&uuml;edad</button>
+		</form>
+		
+		<form class="form-horizontal" role="form"
+			action="/ordenNombreInverso"
+			method="get">
+			<label for="inputText"> IdComic:</label> <input type="text"
+				class="form-control" placeholder="idComic" name="idComic"
+				id="idComic" required> 	
+			<button>Orden Nombre Inverso</button>
+		</form>
+	</div>
+	
+	
+	
+	<table class="table">
+		<thead class="thead-dark">
+			<tr>
+				<th>Id</th>
+				<th>Nombre</th>
+				<th>Fecha de creacion</th>
+				<th>Entrega</th>
+				<th>idComic</th>
+				<th>NombreComic</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for entrega in listaEntregas %}
+			<tr>
+				<td>{{ entrega.idEntrega }}</td>
+				<td>{{ entrega.nombre }}</td>
+				<td>{{ entrega.fechaCreacion.strftime('%Y-%m-%d') }}</td>
+				<td><img src="data:image/png;base64,{{ entrega.archivo }}"
+					style="width: 100px; height: 100px;" /></td>
+				<td>{{ entrega.idComic.idComic }}</td>
+				<td>{{ entrega.idComic.nombre }}</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+	<h1>Añadir Entrega</h1>
+	<form role="form" action="/nuevaEntrega" method="post"
+		enctype="multipart/form-data">
+		<label for="inputText"> Id:</label> <input type="text"
+			class="form-control" placeholder="idComic" name="idComic"
+			id="idComic" required> <label for="inputText"
+			class="control-label">Nombre: </label> <input type="text"
+			name="nombreEntrega" id="nombreEntrega" placeholder="text" required>
+				
+			<label> Archivo <input type="file" accept="image/*"
+				style="width:200px" name="archivoEntrega" id="archivoEntrega">
+			</label>
+
+		<button type="submit" value="submit">Crear</button>
+
+	</form>
+	<h1>Eliminar Entrega</h1>
+	<form role="form" action="/eliminarEntrega" method="get">
+		<label for="inputText"> Id:</label> <input type="text"
+			class="form-control" placeholder="idEntrega" name="idEntrega"
+			id="idEntrega" required>
+		<button type="submit" value="submit">Eliminar</button>
+	</form>
+	<h1>Editar Entrega</h1>
+	<form class="form-inline" role="form" action="/editarEntrega" method="get">
+		<label for="inputText"> Id:</label> <input type="text"
+			class="form-control" placeholder="idEntrega" name="idEntrega"
+			id="idEntrega" required>
+		<label for="inputNombre">Nombre</label> <input
+			type="text" class="form-control" name="nombreEntrega" id="nombreComic">
+
+		<button type="submit" value="submit">Actualizar</button>
+
+	</form>
+	
+	
+
+</body>
+</html>
