@@ -3,14 +3,11 @@ import comic
 import entrega
 import requests
 import json
+import datetime
 
-
-
+service = 'http://localhost:8080/restFullHumilArt/webresources/entity.comic/'
 class Controller(object):
-    wsdl=''
-    service = 'http://localhost:8080/restFullHumilArt/webresources/entity.comic/'
     
-   
 
     def findComicById(self, idComic):
         c = requests.get(service+str(idComic))
@@ -25,7 +22,7 @@ class Controller(object):
     def addComic(self,nombre,descripcion):
         requests.post(service+nombre+'/'+descripcion)
     def deleteComic(self,comic):
-        self.client.service.remove(comic)
+        requests.remove(service+str(comic))
     def editComic(self, comic, nuevoNombre,nuevaDescripcion):
         self.client.service.editComic(comic,nuevoNombre,nuevaDescripcion)
 
@@ -40,7 +37,8 @@ class Controller(object):
     
     def listaOrden(self):
         aux=[]
-        lista=self.client.service.encontrarPorNombreAlfabetico();
+        lista= requests.get(service+'ordenaComicAlfabetico')
+        lista=json.loads(lista.text)
         for i in range(len(lista)):
             comi = comic.Comic(lista[i]['idComic'],lista[i]['nombre'],lista[i]['descripcion'],lista[i]['fechaCreacion'])
             aux.append(comi)
@@ -48,7 +46,8 @@ class Controller(object):
     
     def listaFecha(self):
         aux=[]
-        lista=self.client.service.encontrarPorFecha();
+        lista=requests.get(service+'ordenaComicFecha')
+        lista=json.loads(lista.text)
         for i in range(len(lista)):
             comi = comic.Comic(lista[i]['idComic'],lista[i]['nombre'],lista[i]['descripcion'],lista[i]['fechaCreacion'])
             aux.append(comi)
@@ -56,7 +55,8 @@ class Controller(object):
     
     def listaNombre(self,nombre):
         aux=[]
-        lista=self.client.service.buscarNombre(nombre);
+        lista=requests.get(service+'buscaNombre/'+nombre)
+        lista=json.loads(lista.text)
         for i in range(len(lista)):
             comi = comic.Comic(lista[i]['idComic'],lista[i]['nombre'],lista[i]['descripcion'],lista[i]['fechaCreacion'])
             aux.append(comi)
@@ -64,7 +64,8 @@ class Controller(object):
     
     def listaFechaMayor(self,fecha):
         aux=[]
-        lista=self.client.service.buscarPorFechaMayor(fecha);
+        lista=requests.get(service+'buscaFecha/'+str(datetime.datetime.strptime(fecha,"%Y-%m-%d")))
+        lista=json.loads(lista.text)
         for i in range(len(lista)):
             comi = comic.Comic(lista[i]['idComic'],lista[i]['nombre'],lista[i]['descripcion'],lista[i]['fechaCreacion'])
             aux.append(comi)
@@ -72,7 +73,8 @@ class Controller(object):
     
     def listaNumEntregas(self):
         aux=[]
-        lista=requests.get(service)
+        lista=requests.get(service+'ordenaComicEntrega')
+        lista=json.loads(lista.text)
         for i in range(len(lista)):
             comi = comic.Comic(lista[i]['idComic'],lista[i]['nombre'],lista[i]['descripcion'],lista[i]['fechaCreacion'])
             aux.append(comi)

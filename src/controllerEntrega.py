@@ -1,17 +1,16 @@
 from suds.client import Client
 import entrega
+import requests
+import json
 
-
+service = 'http://localhost:8080/restFullHumilArt/webresources/entity.entrega/'
 
 class ControllerEntrega(object):
     
-    wsdl = 'http://localhost:8080/HumilArt/EntregaWebService?WSDL'
-    client = Client(wsdl)
-    client.options.cache.clear()
-    
+ 
     def findEntrega(self, idEnt):
         print idEnt
-        e = self.client.service.find(idEnt);
+        e = requests.get(service+str(idEnt))
         if e:
             en = entrega.Entrega(e['idEntrega'],e['nombre'],e['archivo'],e['fechaCreacion'],e['idComic'])
             return en
@@ -27,7 +26,8 @@ class ControllerEntrega(object):
         
     def listEntregas(self):
         aux = []
-        lista = self.client.service.findAll();
+        lista = requests.get(service+'findAll')
+        lista=json.loads(lista.text)
         for i in range(len(lista)):
             ent = entrega.Entrega(lista[i]['idEntrega'],lista[i]['nombre'],lista[i]['archivo'],lista[i]['fechaCreacion'],lista[i]['idComic'])
             aux.append(ent)
@@ -35,7 +35,8 @@ class ControllerEntrega(object):
     
     def listEntregasNombreInverso(self,comic):
         aux = []
-        lista = self.client.service.orderInversoNombre(comic);
+        lista = requests.get(service+'ordenaEntregaNombreInverso/'+str(comic))
+        lista=json.loads(lista.text)
         for i in range(len(lista)):
             ent = entrega.Entrega(lista[i]['idEntrega'],lista[i]['nombre'],lista[i]['archivo'],lista[i]['fechaCreacion'],lista[i]['idComic'])
             aux.append(ent)
@@ -43,30 +44,26 @@ class ControllerEntrega(object):
             
     def findByDate(self, idComic):
         aux = []
-        lista = self.client.service.findByFechaDesc(idComic)
+        lista = requests.get(service+'ordenaEntregaFecha/'+str(idComic))
+        lista=json.loads(lista.text)
         for i in range(len(lista)):
             ent = entrega.Entrega(lista[i]['idEntrega'],lista[i]['nombre'],lista[i]['archivo'],lista[i]['fechaCreacion'],lista[i]['idComic'])
             aux.append(ent)
         return aux
     
-    def findByTamano(self):
-        aux = []
-        lista = self.client.service.findByTamano();  
-        for i in range(len(lista)):
-            ent = entrega.Entrega(lista[i]['idEntrega'],lista[i]['nombre'],lista[i]['archivo'],lista[i]['fechaCreacion'],lista[i]['idComic'])
-            aux.append(ent)
-        return aux
     
     def filtrarPorFecha(self,fecha,comic):
         aux = []
-        lista = self.client.service.filtrarPorFecha(fecha,comic);  
+        lista=requests.get(service+'filtraEntregaFecha/'+str(comic)+'/'+fecha)
+        lista=json.loads(lista.text)
         for i in range(len(lista)):
             ent = entrega.Entrega(lista[i]['idEntrega'],lista[i]['nombre'],lista[i]['archivo'],lista[i]['fechaCreacion'],lista[i]['idComic'])
             aux.append(ent)
         return aux
     
     def getFoto(self,idEntrega):
-        foto=self.client.service.getFoto(idEntrega)
-        return foto
+        foto=requests.get(service+'getFoto/'+str(idEntrega))
+     
+        return foto.text
     
     

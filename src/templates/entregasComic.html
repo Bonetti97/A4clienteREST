@@ -79,7 +79,7 @@
 					{% for entrega in listaEntregas %}
 					<tr>
 						<td>{{ entrega.nombre }}</td>
-						<td>{{ entrega.fechaCreacion.strftime('%Y-%m-%d') }}</td>
+						<td>{{ entrega.fechaCreacion }}</td>
             <td><img src="data:image/png;base64,{{ entrega.archivo }}" style="width:100px; height: 100px;" /></td>
 						<td><a class="btn btn-warning"
 							href="/editarEntrega/{{entrega.idEntrega}}">Editar </a></td>
@@ -139,7 +139,7 @@
             {% for entrega in listaEntregas %}
             <tr>
                 <td>{{ entrega.nombre }}</td>
-                <td>{{ entrega.fechaCreacion.strftime('%Y-%m-%d') }}</td>
+                <td>{{ entrega.fechaCreacion }}</td>
                 <td><a class="btn btn-warning" href="/editarComic/{{ entrega.idComic }}">Editar </a></td>
                 <td> <a class="btn btn-danger" href ="/deleteEntrega/{{ entrega.idEntrega }}">Eliminar</a></td>
             </tr>
