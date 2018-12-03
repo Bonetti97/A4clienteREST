@@ -3,7 +3,7 @@ import entrega
 import requests
 import json
 
-service = 'http://localhost:8080/restFullHumilArt/webresources/entity.entrega/'
+service = 'http://localhost:8080/A4servidorREST/webresources/entity.entrega/'
 
 class ControllerEntrega(object):
     
