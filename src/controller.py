@@ -5,7 +5,7 @@ import requests
 import json
 import datetime
 
-service = 'http://localhost:8080/restFullHumilArt/webresources/entity.comic/'
+service = 'http://localhost:8080/A4servidorREST/webresources/entity.comic/'
 class Controller(object):
     
 
@@ -28,7 +28,11 @@ class Controller(object):
 
     def listComics(self):
         listaComics = []
-        lista = requests.get('http://localhost:8080/restFullHumilArt/webresources/entity.comic/findAll')
+        lista = requests.get('http://localhost:8080/A4servidorREST/webresources/entity.comic/findAll')
+<<<<<<< HEAD
+=======
+        print lista.text
+>>>>>>> a89da95e473c31c79560c41a97c08b45d8b12412
         lista=json.loads(lista.text)
         for i in range(len(lista)):
             comi = comic.Comic(lista[i]['idComic'],lista[i]['nombre'],lista[i]['descripcion'],lista[i]['fechaCreacion'])
@@ -82,7 +86,7 @@ class Controller(object):
     
     def getEntregasComic(self,comic):
         aux=[]
-        lista=requests.get('http://localhost:8080/restFullHumilArt/webresources/entity.entrega/filtraEntregaComic/'+str(comic))
+        lista=requests.get('http://localhost:8080/A4servidorREST/webresources/entity.entrega/filtraEntregaComic/'+str(comic))
         lista=json.loads(lista.text)
         for i in range(len(lista)):
             entregas=entrega.Entrega(lista[i]['idEntrega'],lista[i]['nombre'],lista[i]['archivo'],lista[i]['fechaCreacion'],lista[i]['idComic'])

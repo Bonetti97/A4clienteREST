@@ -3,7 +3,7 @@ import entrega
 import requests
 import json
 
-service = 'http://localhost:8080/restFullHumilArt/webresources/entity.entrega/'
+service = 'http://localhost:8080/A4servidorREST/webresources/entity.entrega/'
 
 class ControllerEntrega(object):
     
@@ -18,11 +18,14 @@ class ControllerEntrega(object):
             return None
 
     def addEntrega(self,nombre,archivo,idComic):
-        self.client.service.addEntrega(nombre,archivo,idComic)
+        print nombre
+        print idComic
+        print archivo
+        requests.post(service+nombre+'/'+str(idComic)+'/'+str(archivo))
     def deleteEntrega(self,entrega):
-        self.client.service.remove(entrega)
+        requests.remove(service+str(entrega))
     def editEntrega(self, entrega, nuevoNombre):
-        self.client.service.editEntrega(entrega,nuevoNombre)
+        requests.put(service+str(entrega)+'/'+nuevoNombre)
         
     def listEntregas(self):
         aux = []
