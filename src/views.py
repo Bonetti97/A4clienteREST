@@ -30,7 +30,7 @@ class showComics(BaseHandler):
         
 class AddComic(BaseHandler):
     def get(self):
-        self.render_template('newComic.html', {})
+        self.render_template('login.html', {})
     
     def post(self):
         Controller().addComic(self.request.get('nombreComic'), 

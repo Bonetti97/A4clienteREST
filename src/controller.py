@@ -29,10 +29,6 @@ class Controller(object):
     def listComics(self):
         listaComics = []
         lista = requests.get('http://localhost:8080/A4servidorREST/webresources/entity.comic/findAll')
-<<<<<<< HEAD
-=======
-        print lista.text
->>>>>>> a89da95e473c31c79560c41a97c08b45d8b12412
         lista=json.loads(lista.text)
         for i in range(len(lista)):
             comi = comic.Comic(lista[i]['idComic'],lista[i]['nombre'],lista[i]['descripcion'],lista[i]['fechaCreacion'])
