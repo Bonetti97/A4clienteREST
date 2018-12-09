@@ -18,8 +18,6 @@ class ControllerEntrega(object):
             return None
 
     def addEntrega(self,nombre,archivo,idComic):
-        print nombre
-        print idComic
         print archivo
         requests.post(service+nombre+'/'+str(idComic)+'/'+str(archivo))
     def deleteEntrega(self,entrega):

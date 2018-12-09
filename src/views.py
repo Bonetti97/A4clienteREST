@@ -65,7 +65,8 @@ class EditComic(BaseHandler):
 class DeleteComic(BaseHandler):
     def get(self, comicID):
         Controller().deleteComic(comicID)
-        return webapp2.redirect('/')
+        id = Controller().login()
+        return webapp2.redirect('/showComics/'+id)
     
 class OrdenAlfabetico(BaseHandler):
     def get(self):

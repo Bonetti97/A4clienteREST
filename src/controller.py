@@ -3,7 +3,7 @@ import comic
 import entrega
 import requests
 import json
-import datetime
+from datetime import datetime
 from webapp2_extras import sessions
 import views
 
@@ -29,7 +29,7 @@ class Controller(object):
     def addComic(self,nombre,descripcion):
         requests.post(service+nombre+'/'+descripcion)
     def deleteComic(self,comic):
-        requests.remove(service+str(comic))
+        requests.delete(service+str(comic))
     def editComic(self, comic, nuevoNombre,nuevaDescripcion):
         self.client.service.editComic(comic,nuevoNombre,nuevaDescripcion)
     
@@ -41,10 +41,11 @@ class Controller(object):
     def listComics(self,idUsuario):    
         listaComics = []
         lista = requests.get(service+'findByUsuario/'+idUsuario)
-        print lista
         lista=json.loads(lista.text)
         for i in range(len(lista)):
             comi = comic.Comic(lista[i]['idComic'],lista[i]['nombre'],lista[i]['descripcion'],lista[i]['fechaCreacion'])
+            fec = ((comi.fechaCreacion).encode('ascii','ignore'))[:10]
+            comi.fechaCreacion = fec
             listaComics.append(comi)
         return listaComics
     
@@ -54,6 +55,8 @@ class Controller(object):
         lista=json.loads(lista.text)
         for i in range(len(lista)):
             comi = comic.Comic(lista[i]['idComic'],lista[i]['nombre'],lista[i]['descripcion'],lista[i]['fechaCreacion'])
+            fec = ((comi.fechaCreacion).encode('ascii','ignore'))[:10]
+            comi.fechaCreacion = fec
             aux.append(comi)
         return aux
     
@@ -62,7 +65,9 @@ class Controller(object):
         lista=requests.get(service+'ordenaComicFecha')
         lista=json.loads(lista.text)
         for i in range(len(lista)):
-            comi = comic.Comic(lista[i]['idComic'],lista[i]['nombre'],lista[i]['descripcion'],lista[i]['fechaCreacion'])
+            comi = comic.Comic(lista[i]['idComic'],lista[i]['nombre'],lista[i]['descripcion'],lista[i]['fechaCreacion']) 
+            fec = ((comi.fechaCreacion).encode('ascii','ignore'))[:10]
+            comi.fechaCreacion = fec
             aux.append(comi)
         return aux
     
@@ -72,15 +77,19 @@ class Controller(object):
         lista=json.loads(lista.text)
         for i in range(len(lista)):
             comi = comic.Comic(lista[i]['idComic'],lista[i]['nombre'],lista[i]['descripcion'],lista[i]['fechaCreacion'])
+            fec = ((comi.fechaCreacion).encode('ascii','ignore'))[:10]
+            comi.fechaCreacion = fec
             aux.append(comi)
         return aux
     
     def listaFechaMayor(self,fecha):
         aux=[]
-        lista=requests.get(service+'buscaFecha/'+str(datetime.datetime.strptime(fecha,"%Y-%m-%d")))
+        lista=requests.get(service+'buscaFecha/'+str(datetime.strptime(fecha,"%Y-%m-%d")))
         lista=json.loads(lista.text)
         for i in range(len(lista)):
             comi = comic.Comic(lista[i]['idComic'],lista[i]['nombre'],lista[i]['descripcion'],lista[i]['fechaCreacion'])
+            fec = ((comi.fechaCreacion).encode('ascii','ignore'))[:10]
+            comi.fechaCreacion = fec
             aux.append(comi)
         return aux
     
@@ -90,6 +99,8 @@ class Controller(object):
         lista=json.loads(lista.text)
         for i in range(len(lista)):
             comi = comic.Comic(lista[i]['idComic'],lista[i]['nombre'],lista[i]['descripcion'],lista[i]['fechaCreacion'])
+            fec = ((comi.fechaCreacion).encode('ascii','ignore'))[:10]
+            comi.fechaCreacion = fec
             aux.append(comi)
         return aux
     

@@ -35,11 +35,10 @@ class AddEntrega(BaseHandler):
     def post(self,comicID):
         archivo = self.request.POST.get("archivoEntrega")
         imgenc = base64.encodestring(archivo.file.read())
+        print imgenc
         ControllerEntrega().addEntrega(self.request.get('nombreEntrega'),imgenc,comicID)
         return webapp2.redirect('/entregasComic/'+comicID);     
-   
      
-       
 class EditEntrega(BaseHandler):
     def get(self, entregaID):      
         en = ControllerEntrega().findEntrega(entregaID)
