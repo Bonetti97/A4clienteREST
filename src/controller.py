@@ -5,9 +5,12 @@ import requests
 import json
 import datetime
 
+
 service = 'http://localhost:8080/A4servidorREST/webresources/entity.comic/'
+
+
 class Controller(object):
-    
+   
 
     def findComicById(self, idComic):
         c = requests.get(service+str(idComic))
@@ -25,10 +28,15 @@ class Controller(object):
         requests.remove(service+str(comic))
     def editComic(self, comic, nuevoNombre,nuevaDescripcion):
         self.client.service.editComic(comic,nuevoNombre,nuevaDescripcion)
-
-    def listComics(self):
+    
+    def login(self,idUsuario):
+        requests.session["id"] = idUsuario
+        
+    
+    def listComics(self,idUsuario):    
         listaComics = []
-        lista = requests.get('http://localhost:8080/A4servidorREST/webresources/entity.comic/findAll')
+        lista = requests.get(service+'findByUsuario/'+idUsuario)
+        print lista
         lista=json.loads(lista.text)
         for i in range(len(lista)):
             comi = comic.Comic(lista[i]['idComic'],lista[i]['nombre'],lista[i]['descripcion'],lista[i]['fechaCreacion'])

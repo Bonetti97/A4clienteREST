@@ -23,14 +23,24 @@ class BaseHandler(webapp2.RequestHandler):
         self.response.out.write(template.render(template_values))
         
         
+class login(BaseHandler):
+    def get(self):
+        self.render_template('login.html', {})
+
+class guardarSesion(BaseHandler):
+    def get(self,idUsuario):
+        cos = Controller().login(idUsuario)
+        return webapp2.redirect("/showComics/"+idUsuario);
+        
+        
 class showComics(BaseHandler):
-    def get(self):     
-        cos = Controller().listComics()   
+    def get(self,idUsuario):     
+        cos = Controller().listComics(idUsuario)   
         self.render_template('comics.html', {'listaComic': cos})
         
 class AddComic(BaseHandler):
     def get(self):
-        self.render_template('login.html', {})
+        self.render_template('comics.html', {})
     
     def post(self):
         Controller().addComic(self.request.get('nombreComic'), 
@@ -72,7 +82,6 @@ class BuscarNombre(BaseHandler):
 class BuscarFechaMayor(BaseHandler):
     def get(self):
         fecha=self.request.get('busquedaFechaMayor')
-        print type(fecha)
         cos=Controller().listaFechaMayor(fecha)
         self.render_template('comics.html', {'listaComic': cos})
         

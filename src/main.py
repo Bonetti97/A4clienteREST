@@ -4,7 +4,9 @@ from paste import httpserver
 import viewsEntrega
 
 app = webapp2.WSGIApplication([
-        ('/',views.showComics), 
+        ('/',views.login),
+        ('/guardarSesion/([\d]+)',views.guardarSesion),
+        ('/showComics/([\d]+)',views.showComics), 
         ('/newComic',views.AddComic), 
         ('/editarComic/([\d]+)', views.EditComic),
         ('/delete/([\d]+)', views.DeleteComic),
