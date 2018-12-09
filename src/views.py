@@ -2,6 +2,7 @@ import os
 import webapp2
 import jinja2
 from controller import Controller
+import requests
 
 
 
@@ -21,6 +22,7 @@ class BaseHandler(webapp2.RequestHandler):
         ):
         template = jinja_environment.get_template(filename)
         self.response.out.write(template.render(template_values))
+    
         
         
 class login(BaseHandler):
@@ -29,23 +31,25 @@ class login(BaseHandler):
 
 class guardarSesion(BaseHandler):
     def get(self,idUsuario):
-        cos = Controller().login(idUsuario)
+        #Controller().login(idUsuario)
         return webapp2.redirect("/showComics/"+idUsuario);
         
         
 class showComics(BaseHandler):
-    def get(self,idUsuario):     
-        cos = Controller().listComics(idUsuario)   
+    def get(self,idUsuario): 
+        o = Controller().login()  
+        cos = Controller().listComics(o) 
         self.render_template('comics.html', {'listaComic': cos})
         
 class AddComic(BaseHandler):
     def get(self):
-        self.render_template('comics.html', {})
+        self.render_template('newComic.html', {})
     
     def post(self):
         Controller().addComic(self.request.get('nombreComic'), 
                               self.request.get('descripcionComic'))
-        return webapp2.redirect('/')
+        id = Controller().login()
+        return webapp2.redirect('/showComics/'+id )
         
 class EditComic(BaseHandler):
     def get(self, comicID):      

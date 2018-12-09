@@ -4,6 +4,10 @@ import entrega
 import requests
 import json
 import datetime
+from webapp2_extras import sessions
+import views
+
+
 
 
 service = 'http://localhost:8080/A4servidorREST/webresources/entity.comic/'
@@ -29,8 +33,9 @@ class Controller(object):
     def editComic(self, comic, nuevoNombre,nuevaDescripcion):
         self.client.service.editComic(comic,nuevoNombre,nuevaDescripcion)
     
-    def login(self,idUsuario):
-        requests.session["id"] = idUsuario
+    def login(self):
+        o = requests.get('http://localhost:8080/A4servidorREST/webresources/entity.usuario/'+'getID')
+        return o.text
         
     
     def listComics(self,idUsuario):    
