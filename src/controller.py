@@ -1,14 +1,9 @@
-from suds.client import Client
+
 import comic
 import entrega
 import requests
 import json
 from datetime import datetime
-from webapp2_extras import sessions
-import views
-
-
-
 
 service = 'http://localhost:8080/A4servidorREST/webresources/entity.comic/'
 
@@ -19,7 +14,7 @@ class Controller(object):
     def findComicById(self, idComic):
         c = requests.get(service+str(idComic))
         c=json.loads(c.text)
-        print c
+       
         if c:
             cam = comic.Comic(c['idComic'],c['nombre'],c['descripcion'],c['fechaCreacion'])
             return cam

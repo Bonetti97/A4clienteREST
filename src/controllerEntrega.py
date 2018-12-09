@@ -11,6 +11,8 @@ class ControllerEntrega(object):
     def findEntrega(self, idEnt):
         print idEnt
         e = requests.get(service+str(idEnt))
+        e=json.loads(e.text)
+      
         if e:
             en = entrega.Entrega(e['idEntrega'],e['nombre'],e['archivo'],e['fechaCreacion'],e['idComic'])
             return en
@@ -18,12 +20,18 @@ class ControllerEntrega(object):
             return None
 
     def addEntrega(self,nombre,archivo,idComic):
-        print archivo
-        requests.post(service+nombre+'/'+str(idComic)+'/'+str(archivo))
+    
+        requests.post(service+nombre+'/'+str(idComic),data=json.dumps(archivo), headers={'Content-Type':'application/json'})
     def deleteEntrega(self,entrega):
-        requests.remove(service+str(entrega))
+        requests.delete(service+str(entrega))
     def editEntrega(self, entrega, nuevoNombre):
         requests.put(service+str(entrega)+'/'+nuevoNombre)
+     
+    def getIdComic(self,idEntrega):
+       
+        id = requests.get(service+'getComic/'+idEntrega)
+        
+        return id.text
         
     def listEntregas(self):
         aux = []

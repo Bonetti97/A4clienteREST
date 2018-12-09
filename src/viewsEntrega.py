@@ -40,21 +40,24 @@ class AddEntrega(BaseHandler):
         return webapp2.redirect('/entregasComic/'+comicID);     
      
 class EditEntrega(BaseHandler):
-    def get(self, entregaID):      
+    def get(self, entregaID):   
+        
         en = ControllerEntrega().findEntrega(entregaID)
         self.render_template('editarEntrega.html', {'entrega': en})
         
     def post(self,entregaID):
+        
         nombre = self.request.get('nombreEntrega')
-        entregaAux=ControllerEntrega().findEntrega(entregaID)
+        idComic = ControllerEntrega().getIdComic(entregaID)
         ControllerEntrega().editEntrega(entregaID, nombre);
-        return webapp2.redirect('/entregasComic/'+str(entregaAux.idComic.idComic))
+        return webapp2.redirect('/entregasComic/'+str(idComic))
     
 class DeleteEntrega(BaseHandler):
     def get(self, entregaID):
         entregaAux=ControllerEntrega().findEntrega(entregaID)
+        idComic = ControllerEntrega().getIdComic(entregaID)
         ControllerEntrega().deleteEntrega(entregaID)
-        return webapp2.redirect('/entregasComic/'+str(entregaAux.idComic.idComic))
+        return webapp2.redirect('/entregasComic/'+str(idComic))
     
 class OrdenaFechaDesc(BaseHandler):
     def get(self, comic):
