@@ -23,7 +23,8 @@ app = webapp2.WSGIApplication([
         ('/deleteEntrega/([\d]+)', viewsEntrega.DeleteEntrega),
         ('/ordenFechaEntrega/([\d]+)', viewsEntrega.OrdenaFechaDesc),
         ('/buscarFechaMayor/([\d]+)', viewsEntrega.BuscarFechaMayorEntrega),
-        ('/ordenNombreInverso/([\d]+)', viewsEntrega.OrdenNombreInverso)
+        ('/ordenNombreInverso/([\d]+)', viewsEntrega.OrdenNombreInverso),
+        ('/invitado', views.invitado),
         ],
         debug=True)
 

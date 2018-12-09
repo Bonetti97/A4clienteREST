@@ -54,7 +54,7 @@ class EditEntrega(BaseHandler):
     
 class DeleteEntrega(BaseHandler):
     def get(self, entregaID):
-        entregaAux=ControllerEntrega().findEntrega(entregaID)
+        
         idComic = ControllerEntrega().getIdComic(entregaID)
         ControllerEntrega().deleteEntrega(entregaID)
         return webapp2.redirect('/entregasComic/'+str(idComic))

@@ -34,6 +34,11 @@ class guardarSesion(BaseHandler):
         #Controller().login(idUsuario)
         return webapp2.redirect("/showComics/"+idUsuario);
         
+class invitado(BaseHandler):
+    def get(self): 
+         
+        cos = Controller().listComics(str(2)) 
+        self.render_template('invitado.html', {'listaComic': cos})
         
 class showComics(BaseHandler):
     def get(self,idUsuario): 
