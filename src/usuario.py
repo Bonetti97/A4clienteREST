@@ -1,5 +1,5 @@
 class Usuario(object):
-    def __init__(self, id, token, permiso):
+    def __init__(self,token, permiso,id):
         self.id = id;
         self.token = token
         self.permiso = permiso

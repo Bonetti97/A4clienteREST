@@ -2,12 +2,37 @@
 <h1 class="p">Comics</h1>
 <hr />
 <div class="container align-items-center">
+	{% if (listaComic|length < 4) and (permiso==1) %}
 	<form class="form-group" role="form" action="/newComic" method="get">
 		<hr />
 		<button class="btn btn-primary">Crear Comic</button>
 		<hr />
 	</form>
+	{% elif permiso==2%}
+	
+		<form class="form-group" role="form" action="/newComic" method="get">
+		<hr />
+		<button class="btn btn-primary">Crear Comic</button>
+		<hr />
+	</form>
+	{% else %}
+	
+		<form class="form-group" role="form" action="/newComic" method="get">
+		<hr />
+		<button class="btn btn-primary" disabled>Crear Comic</button>
+		<hr />
+	</form>
+	{% endif %}
 </div>
+
+
+{% if permiso==1 %}
+<form class="form-group" role="form" action="/premium" method="get">
+		<hr />
+		<button class="btn btn-primary" >Hacerse premium</button>
+		<hr />
+	</form>
+{% endif %}
 
 <!-- margen   <span style="margin-left: 5px;" class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> -->
 <div class="container align-items-center">

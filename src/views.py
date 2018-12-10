@@ -29,14 +29,21 @@ class login(BaseHandler):
     def get(self):
         self.render_template('login.html', {})
 
+class premium(BaseHandler):
+    def get(self):
+        o = Controller().login()  
+        Controller().premium()
+        cos = Controller().listComics(o) 
+        u = Controller().findUsuario(o)
+        self.render_template('comics.html', {'listaComic': cos , "permiso" : u.permiso })     
+
 class guardarSesion(BaseHandler):
     def get(self,idUsuario):
         #Controller().login(idUsuario)
         return webapp2.redirect("/showComics/"+idUsuario);
         
 class invitado(BaseHandler):
-    def get(self): 
-         
+    def get(self):   
         cos = Controller().listComics(str(2)) 
         self.render_template('invitado.html', {'listaComic': cos})
         
@@ -44,7 +51,9 @@ class showComics(BaseHandler):
     def get(self,idUsuario): 
         o = Controller().login()  
         cos = Controller().listComics(o) 
-        self.render_template('comics.html', {'listaComic': cos})
+      
+        u = Controller().findUsuario(o)
+        self.render_template('comics.html', {'listaComic': cos , "permiso" : u.permiso })     
         
 class AddComic(BaseHandler):
     def get(self):
@@ -65,7 +74,8 @@ class EditComic(BaseHandler):
         nombre = self.request.get('nombreComic')
         descripcion = self.request.get('descripcionComic')
         Controller().editComic(comicID, nombre, descripcion)
-        return webapp2.redirect('/')
+        o = Controller().login()
+        return webapp2.redirect('/showComics/'+o)
 
 class DeleteComic(BaseHandler):
     def get(self, comicID):
@@ -76,29 +86,39 @@ class DeleteComic(BaseHandler):
 class OrdenAlfabetico(BaseHandler):
     def get(self):
         cos=Controller().listaOrden()
-        self.render_template('comics.html', {'listaComic': cos})
-        
+        o = Controller().login()  
+        u = Controller().findUsuario(o)
+        self.render_template('comics.html', {'listaComic': cos , "permiso" : u.permiso })
+       
 class OrdenFecha(BaseHandler):
     def get(self):
         cos=Controller().listaFecha()
-        self.render_template('comics.html', {'listaComic': cos})
+        o = Controller().login()  
+        u = Controller().findUsuario(o)
+        self.render_template('comics.html', {'listaComic': cos , "permiso" : u.permiso })
         
 class BuscarNombre(BaseHandler):
     def get(self):
         nombre = self.request.get('busquedaNombre')
         cos=Controller().listaNombre(nombre)
-        self.render_template('comics.html', {'listaComic': cos})
+        o = Controller().login()  
+        u = Controller().findUsuario(o)
+        self.render_template('comics.html', {'listaComic': cos , "permiso" : u.permiso })
         
 class BuscarFechaMayor(BaseHandler):
     def get(self):
         fecha=self.request.get('busquedaFechaMayor')
         cos=Controller().listaFechaMayor(fecha)
-        self.render_template('comics.html', {'listaComic': cos})
+        o = Controller().login()  
+        u = Controller().findUsuario(o)
+        self.render_template('comics.html', {'listaComic': cos , "permiso" : u.permiso })
         
 class OrdenEntregas(BaseHandler):
     def get(self):
         cos=Controller().listaNumEntregas();
-        self.render_template('comics.html', {'listaComic': cos})
+        o = Controller().login()  
+        u = Controller().findUsuario(o)
+        self.render_template('comics.html', {'listaComic': cos , "permiso" : u.permiso })
 
 
 

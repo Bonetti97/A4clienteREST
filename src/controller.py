@@ -3,6 +3,7 @@ import comic
 import entrega
 import requests
 import json
+import usuario
 from datetime import datetime
 
 service = 'http://localhost:8080/A4servidorREST/webresources/entity.comic/'
@@ -20,13 +21,25 @@ class Controller(object):
             return cam
         else:
             return None
+        
+    def findUsuario(self, id):
+        c = requests.get('http://localhost:8080/A4servidorREST/webresources/entity.usuario/'+id)
+        c=json.loads(c.text)
+     
+        if c:
+            cam = usuario.Usuario(c['idtoken'],c['permiso'],c['idUsuario'])
+            return cam
+        else:
+            return None 
+    def premium(self):
+        requests.put('http://localhost:8080/A4servidorREST/webresources/entity.usuario/premium')       
 
     def addComic(self,nombre,descripcion):
         requests.post(service+nombre+'/'+descripcion)
     def deleteComic(self,comic):
         requests.delete(service+str(comic))
     def editComic(self, comic, nuevoNombre,nuevaDescripcion):
-        self.client.service.editComic(comic,nuevoNombre,nuevaDescripcion)
+        requests.put(service+str(comic)+'/'+nuevoNombre+'/'+nuevaDescripcion)
     
     def login(self):
         o = requests.get('http://localhost:8080/A4servidorREST/webresources/entity.usuario/'+'getID')
@@ -37,8 +50,10 @@ class Controller(object):
         listaComics = []
         lista = requests.get(service+'findByUsuario/'+idUsuario)
         lista=json.loads(lista.text)
+        
         for i in range(len(lista)):
             comi = comic.Comic(lista[i]['idComic'],lista[i]['nombre'],lista[i]['descripcion'],lista[i]['fechaCreacion'])
+            
             fec = ((comi.fechaCreacion).encode('ascii','ignore'))[:10]
             comi.fechaCreacion = fec
             listaComics.append(comi)
@@ -90,8 +105,10 @@ class Controller(object):
     
     def listaNumEntregas(self):
         aux=[]
+      
         lista=requests.get(service+'ordenaComicEntrega')
         lista=json.loads(lista.text)
+        print lista
         for i in range(len(lista)):
             comi = comic.Comic(lista[i]['idComic'],lista[i]['nombre'],lista[i]['descripcion'],lista[i]['fechaCreacion'])
             fec = ((comi.fechaCreacion).encode('ascii','ignore'))[:10]

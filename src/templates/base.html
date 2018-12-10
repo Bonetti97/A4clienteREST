@@ -29,8 +29,17 @@ body {
 </head>
 
 <body>
+
+<script> function signOut() {
+    var auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut();
+ }
+</script>
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+
 	<nav class="navbar navbar-dark bg-primary">
 		<a class="navbar-brand" href="/">HumilArt</a>
+		 <a href="/" style="color:white" onclick="signOut();">Sign out</a>
 	</nav>
 
 	<!-- Page Content -->
