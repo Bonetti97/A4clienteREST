@@ -20,8 +20,15 @@ class ControllerEntrega(object):
             return None
 
     def addEntrega(self,nombre,archivo,idComic):
-    
-        requests.post(service+nombre+'/'+str(idComic),data=json.dumps(archivo), headers={'Content-Type':'application/json'})
+        foto = json.dumps(archivo)
+        #print foto
+        d = {'param1': 'value1', 'param2': 'value2'}
+        a = json.dumps(d)
+        #headers={'Content-Type':'x-www-form-urlencoded'}
+        #Content-Type':'application/json'
+        r= requests.post(service+'crearEntrega',foto,headers={'Content-Type':'application/json', 'Accept': 'application/json'})
+        print r.json
+        print r
     def deleteEntrega(self,entrega):
         requests.delete(service+str(entrega))
     def editEntrega(self, entrega, nuevoNombre):

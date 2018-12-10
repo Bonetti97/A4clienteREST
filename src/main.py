@@ -10,6 +10,7 @@ app = webapp2.WSGIApplication([
         ('/guardarSesion/([\d]+)',views.guardarSesion),
         ('/showComics/([\d]+)',views.showComics), 
         ('/newComic',views.AddComic), 
+        ('/premium',views.doPremium), 
         ('/editarComic/([\d]+)', views.EditComic),
         ('/delete/([\d]+)', views.DeleteComic),
         ('/ordenAlfabetico',views.OrdenAlfabetico),

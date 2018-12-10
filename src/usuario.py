@@ -1,5 +1,5 @@
 class Usuario(object):
-    def __init__(self, id, token, permiso):
+    def __init__(self, token, permiso, id):
         self.id = id;
         self.token = token
         self.permiso = permiso
@@ -11,4 +11,4 @@ class Usuario(object):
             'permiso':self.permiso
             }
     def __str__(self):
-        return 'id: '+self.id+' token: '+self.token+' permiso: '+permiso
+        return 'id: '+self.id+' token: '+self.token+' permiso: '+self.permiso
