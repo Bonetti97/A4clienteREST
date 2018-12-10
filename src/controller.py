@@ -1,7 +1,6 @@
 
 import comic
 import entrega
-import usuario
 import requests
 import json
 from datetime import datetime
@@ -27,23 +26,12 @@ class Controller(object):
     def deleteComic(self,comic):
         requests.delete(service+str(comic))
     def editComic(self, comic, nuevoNombre,nuevaDescripcion):
-        requests.put(service+comic+'/'+nuevoNombre+'/'+nuevaDescripcion)
-    def doPremium(self):
-        requests.put('http://localhost:8080/A4servidorREST/webresources/entity.usuario/premium')
+        self.client.service.editComic(comic,nuevoNombre,nuevaDescripcion)
     
     def login(self):
         o = requests.get('http://localhost:8080/A4servidorREST/webresources/entity.usuario/'+'getID')
         return o.text
         
-    def findUsuario(self,idUsuario):
-        us = requests.get('http://localhost:8080/A4servidorREST/webresources/entity.usuario/'+idUsuario)
-        us = json.loads(us.text)
-       
-        if us:
-            cam = usuario.Usuario(us['idtoken'],us['permiso'],us['idUsuario'])
-            return cam
-        else:
-            return None
     
     def listComics(self,idUsuario):    
         listaComics = []
