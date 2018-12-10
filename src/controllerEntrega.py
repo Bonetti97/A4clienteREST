@@ -63,10 +63,13 @@ class ControllerEntrega(object):
     
     def filtrarPorFecha(self,fecha,comic):
         aux = []
-        lista=requests.get(service+'filtraEntregaFecha/'+str(comic)+'/'+fecha)
+       
+        lista=requests.get(service+'filtraEntregaFecha/'+str(comic)+'/'+str(fecha))
+        print lista.text
         lista=json.loads(lista.text)
         for i in range(len(lista)):
             ent = entrega.Entrega(lista[i]['idEntrega'],lista[i]['nombre'],lista[i]['archivo'],lista[i]['fechaCreacion'],lista[i]['idComic'])
+            ent.fechaCreacion = ((ent.fechaCreacion).encode('ascii','ignore'))[:10]
             aux.append(ent)
         return aux
     

@@ -105,8 +105,8 @@ class Controller(object):
     
     def listaNumEntregas(self):
         aux=[]
-      
         lista=requests.get(service+'ordenaComicEntrega')
+        print lista.text
         lista=json.loads(lista.text)
         print lista
         for i in range(len(lista)):
