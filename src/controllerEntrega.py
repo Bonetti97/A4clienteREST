@@ -3,6 +3,7 @@ import entrega
 import requests
 import json
 
+
 service = 'http://localhost:8080/A4servidorREST/webresources/entity.entrega/'
 
 class ControllerEntrega(object):
@@ -20,8 +21,13 @@ class ControllerEntrega(object):
             return None
 
     def addEntrega(self,nombre,archivo,idComic):
-    
-        requests.post(service+nombre+'/'+str(idComic),data=json.dumps(archivo), headers={'Content-Type':'application/json'})
+        foto = json.dumps(archivo)
+        form = { "input" : archivo  }
+        form = json.dumps(form)
+
+        r= requests.post(service+'crearEntrega', data=foto, headers={'Content-Type':'application/json','Accept': 'text/plain'})
+        print r
+        print r.text
     def deleteEntrega(self,entrega):
         requests.delete(service+str(entrega))
     def editEntrega(self, entrega, nuevoNombre):
@@ -75,7 +81,6 @@ class ControllerEntrega(object):
     
     def getFoto(self,idEntrega):
         foto=requests.get(service+'getFoto/'+str(idEntrega))
-     
         return foto.text
     
     

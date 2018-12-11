@@ -53,6 +53,7 @@ class showComics(BaseHandler):
         cos = Controller().listComics(o) 
       
         u = Controller().findUsuario(o)
+        
         self.render_template('comics.html', {'listaComic': cos , "permiso" : u.permiso })     
         
 class AddComic(BaseHandler):
