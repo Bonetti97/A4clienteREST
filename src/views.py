@@ -90,7 +90,8 @@ class OrdenAlfabetico(BaseHandler):
         o = Controller().login()  
         u = Controller().findUsuario(o)
         self.render_template('comics.html', {'listaComic': cos , "permiso" : u.permiso })
-       
+
+        
 class OrdenFecha(BaseHandler):
     def get(self):
         cos=Controller().listaFecha()
@@ -121,7 +122,11 @@ class OrdenEntregas(BaseHandler):
         u = Controller().findUsuario(o)
         self.render_template('comics.html', {'listaComic': cos , "permiso" : u.permiso })
 
-
+class splashApi(BaseHandler):
+    def get(self):
+        nombre = self.request.get('nombreApi')
+        urlImagen= Controller().splashApi(nombre)
+        self.render_template('prueba.html',{'imagen': urlImagen})
 
         
         

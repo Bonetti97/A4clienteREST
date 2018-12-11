@@ -25,7 +25,8 @@ app = webapp2.WSGIApplication([
         ('/buscarFechaMayor/([\d]+)', viewsEntrega.BuscarFechaMayorEntrega),
         ('/ordenNombreInverso/([\d]+)', viewsEntrega.OrdenNombreInverso),
         ('/invitado', views.invitado),
-        ('/premium', views.premium)
+        ('/premium', views.premium),
+        ('/splashApii',views.splashApi)
         ],
         debug=True)
 

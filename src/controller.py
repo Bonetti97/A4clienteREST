@@ -126,5 +126,11 @@ class Controller(object):
         return aux
         
     
-    
-        
+    def splashApi(self,nombre):
+        url='https://api.unsplash.com/search/photos/?client_id=2bcb4891c83542f24955be2b647d4e68184448bfe84e99c75f829f4d2449c575'
+        r = requests.get(url+'&query='+nombre)
+        lista = r.json()
+        if lista['total'] == 0:
+            return 'https://bigseoagency.com/wp-content/uploads/2018/03/error-404-foxplay.png'
+        imagenAleatoria= lista['results'][0]['urls']['small']
+        return imagenAleatoria
