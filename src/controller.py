@@ -4,7 +4,9 @@ import entrega
 import requests
 import json
 import usuario
+
 from datetime import datetime
+from django.template.defaultfilters import length
 
 service = 'http://localhost:8080/A4servidorREST/webresources/entity.comic/'
 
@@ -49,8 +51,9 @@ class Controller(object):
     def listComics(self,idUsuario):    
         listaComics = []
         lista = requests.get(service+'findByUsuario/'+idUsuario)
+       
         lista=json.loads(lista.text)
-        
+       
         for i in range(len(lista)):
             comi = comic.Comic(lista[i]['idComic'],lista[i]['nombre'],lista[i]['descripcion'],lista[i]['fechaCreacion'])
             
@@ -120,6 +123,7 @@ class Controller(object):
         aux=[]
         lista=requests.get('http://localhost:8080/A4servidorREST/webresources/entity.entrega/filtraEntregaComic/'+str(comic))
         lista=json.loads(lista.text)
+        
         for i in range(len(lista)):
             entregas=entrega.Entrega(lista[i]['idEntrega'],lista[i]['nombre'],lista[i]['archivo'],lista[i]['fechaCreacion'],lista[i]['idComic'])
             aux.append(entregas)
@@ -134,3 +138,32 @@ class Controller(object):
             return 'https://bigseoagency.com/wp-content/uploads/2018/03/error-404-foxplay.png'
         imagenAleatoria= lista['results'][0]['urls']['small']
         return imagenAleatoria
+    
+    def flickr(self,tag):
+        clave = "b56fe120d5d60193cdff938b0af0ed91"
+        #secreto = '7941625e2330f77c'
+        url = 'https://api.flickr.com/services/rest/?method=flickr.photos.search&format=json&api_key='+clave+'&tags='+tag
+        r = requests.get(url);
+       
+        r = r.text[14:]
+        r = r[:-1]
+        respuesta = json.loads(r)
+        lista=  respuesta['photos']['photo']
+       
+        listaUrl = []
+        for i in range(len(lista)):
+            
+            secret = lista[i]['secret']
+            farm = lista[i]['farm']
+            server = lista[i]['server']  
+            id=lista[i]['id']
+            urlfoto = 'http://farm'+str(farm)+'.staticflickr.com/'+str(server)+'/'+str(id)+'_'+str(secret)+'_z.jpg'
+            listaUrl.append(urlfoto)
+        
+        
+
+        return listaUrl
+        
+        
+        
+        

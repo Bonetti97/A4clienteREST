@@ -2,6 +2,14 @@
 <head>
 </head>
 <body>
-<img src={{imagen}} alt="ejemplo">
+ <!-- <img src={{imagen}} alt="ejemplo"> -->
+
+{% if lista|length > 0  %}
+{% for i in lista %}
+ <img src={{i}} alt="ejemplo">
+{% endfor %}
+{% else %}
+ <img src="https://files.paredro.com/uploads/2017/07/404-not-found-01.jpg" alt="ejemplo">
+{% endif %}
 </body>
 </html>
