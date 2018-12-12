@@ -1,10 +1,10 @@
-import controllerEntrega
+
 
 class Entrega(object):
     def __init__(self, idEntrega, nombre, archivo, fechaCreacion,idComic):
         self.idEntrega = idEntrega
         self.nombre = nombre
-        self.archivo = controllerEntrega.ControllerEntrega().getFoto(idEntrega)
+        self.archivo = archivo
         self.fechaCreacion = fechaCreacion
         self.idComic = idComic
         

@@ -80,7 +80,7 @@
 					<tr>
 						<td>{{ entrega.nombre }}</td>
 						<td>{{ entrega.fechaCreacion }}</td>
-            <td><img src="data:image/png;base64,{{ entrega.archivo }}" style="width:100px; height: 100px;" /></td>
+            <td><img src="{{ entrega.archivo }}" style="width:100px; height: 100px;" /></td>
 						<td><a class="btn btn-warning"
 							href="/editarEntrega/{{entrega.idEntrega}}">Editar </a></td>
 						<td><a class="btn btn-danger"

@@ -21,13 +21,10 @@ class ControllerEntrega(object):
             return None
 
     def addEntrega(self,nombre,archivo,idComic):
-        foto = json.dumps(archivo)
-        form = { "input" : archivo  }
-        form = json.dumps(form)
-
-        r= requests.post(service+'crearEntrega', data=foto, headers={'Content-Type':'application/json','Accept': 'text/plain'})
-        print r
-        print r.text
+        url = json.dumps(archivo)
+        
+        requests.post(service+nombre+'/'+idComic , data=url, headers={'Content-type': 'application/json'} )
+      
     def deleteEntrega(self,entrega):
         requests.delete(service+str(entrega))
     def editEntrega(self, entrega, nuevoNombre):
@@ -69,7 +66,6 @@ class ControllerEntrega(object):
     
     def filtrarPorFecha(self,fecha,comic):
         aux = []
-       
         lista=requests.get(service+'filtraEntregaFecha/'+str(comic)+'/'+str(fecha))
         print lista.text
         lista=json.loads(lista.text)
@@ -79,8 +75,6 @@ class ControllerEntrega(object):
             aux.append(ent)
         return aux
     
-    def getFoto(self,idEntrega):
-        foto=requests.get(service+'getFoto/'+str(idEntrega))
-        return foto.text
+   
     
     

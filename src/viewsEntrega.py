@@ -33,10 +33,9 @@ class AddEntrega(BaseHandler):
         self.render_template('newEntrega.html', {'comicID':comicID})
     
     def post(self,comicID):
-        archivo = self.request.POST.get("archivoEntrega")
-        imgenc = base64.encodestring(archivo.file.read())
-       
-        ControllerEntrega().addEntrega(self.request.get('nombreEntrega'),imgenc,comicID)
+        archivo = self.request.POST.get("url")
+        
+        ControllerEntrega().addEntrega(self.request.get('nombreEntrega'),archivo,comicID)
         return webapp2.redirect('/entregasComic/'+comicID);     
      
 class EditEntrega(BaseHandler):
