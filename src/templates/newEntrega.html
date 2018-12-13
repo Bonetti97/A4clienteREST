@@ -15,26 +15,17 @@
 						</label>
 						<div class="col-sm-6">
 							<input type="text" class="form-control" name="nombreEntrega"
-								id="nombreEntrega" placeholder="text">
+								id="nombreEntrega" placeholder="Nombre de la entrega.">
 						</div>
 					</div>
-					<!--  <div class="form-group">
-				<label for="inputFile" class="col-sm-3 control-label">Archivo</label>
-				<div class="col-sm-6">
-					<input type="file" accept="image/*" class="form-control"
-						name="archivoEntrega" id="archivoEntrega">
-				</div>
-			</div>
-			
-			<label class="btn btn-primary"> Archivo <input type="file"
-							accept="image/*" style="display: none;" name="archivoEntrega"
-							id="archivoEntrega"></label>
-			 -->
 					<div>
-					
-						<input type="text" class="form-control" name="url"
-								id="url" placeholder="text"></input>
-						
+						<select id="tipo" name="tipo" class="form-control">
+   						 	<option value="link">URL</option>
+    					 	<option value="archivo">Archivo</option>
+<						</select>
+						<input type="" class="form-control" name="url"
+								id="url" ></input>
+				
 					</div>
 					<span style="margin-right: 10px;"></span>
 					<div class="form-group text-center">
@@ -45,6 +36,18 @@
 		</div>
 	</div>
 </div>
+<!-- Este script es para que el type del input cambie segun lo que seleccionemos en el select. -->
+<script>
+	$(document).on('change','#tipo',function() {
+		if($(this).val() == 'link'){
+				$('#url').prop('type', 'text');
+		}
+		 else{
+				$('#url').prop('type', 'file');	
+		 }
+	});
+</script>
+						
 
 {% endblock content %}
 

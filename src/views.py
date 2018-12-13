@@ -128,7 +128,11 @@ class splashApi(BaseHandler):
         urlImagen= Controller().splashApi(nombre)
         self.render_template('prueba.html',{'imagen': urlImagen})
 
-        
+class flickr(BaseHandler):
+    def get(self):
+        tag = self.request.get('nombreApi')
+        lista = Controller().flickr(tag)
+        self.render_template('prueba.html', {'lista': lista})        
         
         
         
