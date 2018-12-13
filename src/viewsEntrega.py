@@ -36,7 +36,7 @@ class AddEntrega(BaseHandler):
         archivo = self.request.POST.get("url")
         
         ControllerEntrega().addEntrega(self.request.get('nombreEntrega'),archivo,comicID)
-        return webapp2.redirect('/entregasEntrega/'+comicID);     
+        return webapp2.redirect('/entregasComic/'+str(comicID));     
      
 class EditEntrega(BaseHandler):
     def get(self, entregaID):   

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 
 <html lang="en">
 
@@ -20,6 +20,11 @@
 	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
 	crossorigin="anonymous">
 <!-- Custom CSS -->
+  
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 <style>
 
 html, body {
@@ -41,7 +46,9 @@ text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black
 	background-color: rgba(0, 0, 0, 0.75) !important;
 }
 .card{
-background-color: rgba(0, 0, 0, 0.5) !important;
+background-color: #edefed !important;
+box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+border-radius: 5px 5px 5px 5px;
 }
 .card label {
 	color:black;
@@ -56,6 +63,27 @@ color: white
 .container p {
 	color: black;
 }
+.botonF1{
+  width:60px;
+  height:60px;
+  border-radius:100%;
+  background:#7eec27;
+  right:-30px;
+  bottom:-181px;
+  position:relative;
+  border:none;
+  outline:none;
+  color:#FFF;
+  font-size:36px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);  
+}
+.botonF1:hover span{
+  transform:rotate(360deg);
+}
+.botonF1:active{
+  transform:scale(1.1);
+}
+
 .box21{overflow:hidden}
 .mt-30{margin-top:30px}
 .mt-40{margin-top:40px}

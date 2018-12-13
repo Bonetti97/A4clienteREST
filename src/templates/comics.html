@@ -6,21 +6,27 @@
 <hr />
 <div class="container align-items-center">
 	{% if (listaComic|length < 4) and (permiso==1) %}
-	<form class="form-group" role="form" action="/newComic" method="get">
-		<hr />
+
 		<div class="row">
 			<div class="col-md-6">
-				<button class="btn btn-dark">Crear Comic</button>
-			</div>
+			<div class="col-md-4">
+			<form class="form-inline" action="/flickr">
+				<input type="text" class="form-control" name="nombreApi" id="nombreApi"placeholder="Etiqueta" required></input>
+				<button type="submit" value="submit" class="btn btn-dark">Buscar nuevas ideas</button>
 			</form>
+			</div>
+			<form class="form-group" role="form" action="/newComic" method="get">
+				<button class="botonF1"><span>+</span></button>
+			</form>
+			</div>	
 			<div class="col-md-6 text-right ">
 			<div class="titulo">
 				<h1 style="color:#ffffff;text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black">Usuario Estándar	
 		<form class="form-group" role="form" action="/premium" method="get">	
-		<button class="btn btn-dark"
-			title="Podrá convertirse en premium haciendo click">Premium</button>
-		</h1>
-			</form>
+			<button class="btn btn-dark"
+				title="Podrá convertirse en premium haciendo click">Premium</button>
+			</h1>
+		</form>
 	</div>
 
 </div>
@@ -32,12 +38,18 @@
 	</form>
 	{% elif permiso==2%}
 
-	<form class="form-group" role="form" action="/newComic" method="get">
-		<hr />
 		<div class="row">
 			<div class="col-md-6">
-				<button class="btn btn-dark">Crear Comic</button>
+			<div class="col-md-4">
+			<form class="form-inline" action="/flickr">
+				<input type="text" class="form-control" name="nombreApi" id="nombreApi"placeholder="Etiqueta" required></input>
+				<button type="submit" value="submit" class="btn btn-dark">Buscar nuevas ideas</button>
+			</form>
 			</div>
+			<form class="form-group" role="form" action="/newComic" method="get">
+				<button class="botonF1"><span>+</span></button>
+			</form>
+			</div>	
 			<div class="col-md-6 text-right">
 				<div class="titulo">
 				<h1>Usuario premium</h1>
@@ -48,15 +60,21 @@
 	</form>
 	{% else %}
 
-	<form class="form-group" role="form" action="/newComic" method="get">
-		<hr />
 		<div class="row">
 			<div class="col-md-6">
-				<button class="btn btn-dark" disabled>Crear Comic</button>
+			<div class="col-md-4">
+			<form class="form-inline" action="/flickr">
+				<input type="text" class="form-control" name="nombreApi" id="nombreApi"placeholder="Etiqueta" required></input>
+				<button type="submit" value="submit" class="btn btn-dark">Buscar nuevas ideas</button>
+			</form>
 			</div>
+			<form class="form-group" role="form" action="/newComic" method="get">
+				<button class="botonF1" disabled><span>+</span></button>
+			</form>
+			</div>	
 			<div class="col-md-6 text-right">
 				<div class="titulo">
-				<h1>Usuario invitado</h1>
+				<h1>Usuario Estándar</h1>
 				</div>
 			</div>
 		</div>
@@ -66,11 +84,6 @@
 
 </div>
 
-<form class="form-inline" action="/flickr">
-	<input type="text" class="form-control" name="nombreApi" id="nombreApi"
-		placeholder="Etiqueta" required></input>
-	<button type="submit" value="submit" class="btn btn-dark">Buscar nuevas ideas</button>
-</form>
 
 
 <div class="container align-items-center">
@@ -107,9 +120,11 @@
 			</div>
 		</div>
 	</div>
+	
 	<div class="container align-items-center">
-		<div
-			class="d-flex flex-row-reverse align-items-center pt-1 pb-1 mb-2 border-bottom">
+	
+		<div class="d-flex flex-row-reverse align-items-center pt-1 pb-1 mb-2 border-bottom">
+		
 			<form class="form-horizontal" role="form" action="/ordenFecha"
 				method="get">
 				<button class="btn btn-dark">Orden Fecha</button>
@@ -119,6 +134,7 @@
 				method="get">
 				<button class="btn btn-dark">Orden Numero Entregas</button>
 			</form>
+			
 		</div>
 		{% if listaComic|length > 0 %}
 		<div class="table-resposive">

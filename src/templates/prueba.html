@@ -1,67 +1,36 @@
-{% extends "base.html" %} {% block content %}
-<head>
+
 <style>
-.hide-bullets {
-    list-style:none;
-    margin-left: -40px;
-    margin-top:20px;
-}
-
-.thumbnail {
-    padding: 0;
-}
-
-.carousel-inner>.item>img, .carousel-inner>.item>a>img {
-    width: 100%;
+html{
+ background-image: url('http://www.imperial.ac.uk/imedia/general_graphics/interact/images/Flickr.jpg');
+ -webkit-background-size: cover;
+ -moz-background-size: cover;
+ -o-background-size: cover;
+ background-size: cover;
 }
 </style>
-<script>
-  jQuery(document).ready(function($) {
- 
-        $('#myCarousel').carousel({
-                interval: 5000
-        });
- 
-        //Handles the carousel thumbnails
-        $('[id^=carousel-selector-]').click(function () {
-        var id_selector = $(this).attr("id");
-        try {
-            var id = /-(\d+)$/.exec(id_selector)[1];
-            console.log(id_selector, id);
-            jQuery('#myCarousel').carousel(parseInt(id));
-        } catch (e) {
-            console.log('Regex failed!', e);
-        }
-    });
-        // When the carousel slides, auto update the text
-        $('#myCarousel').on('slid.bs.carousel', function (e) {
-                 var id = $('.item.active').data('slide-number');
-                $('#carousel-text').html($('#slide-content-'+id).html());
-        });
-});
-</script>
+<head>
 </head>
 <body>
 
-{% if lista|length > 0  %}
-{% for i in lista %}
- <div class="container mt-40 mb-30">
+<div class="container mt-40 mb-30">
             <div class="row mt-30">
+            {% if lista|length > 0  %}
+		{% for i in lista %}
                 <div class="col-md-4 col-sm-6">
                     <div class="box21">
-                         <img src={{i}} alt="ejemplo">
-                        <div class="box-content">  
-                        </div>
+                        <img src="{{i}}" alt="">
                     </div>
                 </div>
+                {% endfor %}
+               
             </div>
         </div>
-
-{% endfor %}
 {% else %}
  <img src="https://files.paredro.com/uploads/2017/07/404-not-found-01.jpg" alt="ejemplo" height=100% width=100% >
 {% endif %}
 </body>
 </html>
- {% endblock content %}
+
+ 
+ 
  

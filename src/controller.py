@@ -97,7 +97,7 @@ class Controller(object):
     
     def listaFechaMayor(self,fecha):
         aux=[]
-        lista=requests.get(service+'buscaFecha/'+str(datetime.strptime(fecha,"%Y-%m-%d")))
+        lista=requests.get(service+'buscaFecha/'+str(fecha))
         lista=json.loads(lista.text)
         for i in range(len(lista)):
             comi = comic.Comic(lista[i]['idComic'],lista[i]['nombre'],lista[i]['descripcion'],lista[i]['fechaCreacion'])
@@ -109,7 +109,6 @@ class Controller(object):
     def listaNumEntregas(self):
         aux=[]
         lista=requests.get(service+'ordenaComicEntrega')
-        print lista.text
         lista=json.loads(lista.text)
         print lista
         for i in range(len(lista)):
