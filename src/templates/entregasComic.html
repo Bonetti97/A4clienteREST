@@ -22,22 +22,8 @@
 	</form>
 </div>
 {% endif %}
-
-      <div class="container mt-40 mb-30">
-            <div class="row mt-30">
-                <div class="col-md-4 col-sm-6">
-                    <div class="box21">
-                        <img src="http://bestjquery.com/tutorial/hover-effect/demo95/images/img-1.jpg" alt="">
-                        <div class="box-content">
-                            <h4 class="title">Boned</h4>
-                            <p class="description">Te odio mucho, esta es una prueba de descripción.</p>
-                            <a class="read-more" href="#">read more</a>
-                        </div>
-                    </div>
-                </div>
-              </div>
-           </div>
-            
+ 
+       
 {% if listaEntregas |length > 0 %}
 
 <div class="container align-items-center">
@@ -80,31 +66,11 @@
 			</form>
 		</div>
 
-		<div class="table-resposive">
-			<table class="table">
-				<thead class="thead-dark">
-					<tr>
-						<th scope="col">Nombre</th>
-						<th scope="col">Fecha de creacion</th>
-						<th scope="col">Entrega</th>
-						<th scope="col"></th>
-						<th scope="col"></th>
-					</tr>
-				</thead>
-				<tbody>
-					{% for entrega in listaEntregas %}
-					<tr>
-						<td>{{ entrega.nombre }}</td>
-						<td>{{ entrega.fechaCreacion }}</td>
-            <td><img src="{{ entrega.archivo }}" style="width:100px; height: 100px;" /></td>
-						<td><a class="btn btn-warning"
-							href="/editarEntrega/{{entrega.idEntrega}}">Editar </a></td>
-						<td><a class="btn btn-danger"
-							href="/deleteEntrega/{{ entrega.idEntrega }}">Eliminar</a></td>
-					</tr>
-					{% endfor %}
-				</tbody>
-			</table>
+		
+	    
+            </div>
+        </div>
+       
 
 			{% else %}
 			<div class="container align-items-center">
@@ -118,6 +84,27 @@
 		</div>
 	</div>
 </div>
+ <div class="container mt-40 mb-30">
+            <div class="row mt-30">
+            {% for entrega in listaEntregas %}
+                <div class="col-md-4 col-sm-6">
+                    <div class="box21">
+                        <img src="{{ entrega.archivo }}" alt="">
+                        <div class="box-content">
+                            <h4 class="title">{{ entrega.nombre }}</h4>
+                            <p class="description">  {{entrega.fechaCreacion[:10]}}</p>
+                           
+                            <a class="edit" href="/editarComic/{{ entrega.idComic }}">Editar </a>
+                		 	    <a class="delete" href ="/deleteEntrega/{{ entrega.idEntrega }}">Eliminar</a>
+                		 	   
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+               
+            </div>
+        </div>
+       
 
 <!--
     <span style="margin-left: 5px;" class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
@@ -146,25 +133,30 @@
                         <button class="btn btn-warning">Orden Nombre Inverso </button>
                                 </form>
 
-        <table class="table">
-            <thead>
-            	<th> Nombre </th>
-            	<th> Fecha de creacion </th>
-            </thead>
-            <tbody>
-            {% for entrega in listaEntregas %}
-            <tr>
-                <td>{{ entrega.nombre }}</td>
-                <td>{{ entrega.fechaCreacion }}</td>
-                <td><a class="btn btn-warning" href="/editarComic/{{ entrega.idComic }}">Editar </a></td>
-                <td> <a class="btn btn-danger" href ="/deleteEntrega/{{ entrega.idEntrega }}">Eliminar</a></td>
-            </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-    </div>
-    <div class="col-md-2"></div>
+      
+	   
 </div>
+ <div class="container mt-40 mb-30">
+            <div class="row mt-30">
+            {% for entrega in listaEntregas %}
+                <div class="col-md-4 col-sm-6">
+                    <div class="box21">
+                        <img src="{{ entrega.archivo }}" alt="">
+                        <div class="box-content">
+                            <h4 class="title">{{ entrega.nombre }}</h4>
+                            <p class="description">  {{entrega.fechaCreacion[:10]}}</p>
+                           
+                            <a class="edit" href="/editarComic/{{ entrega.idComic }}">Editar </a>
+                		 	    <a class="delete" href ="/deleteEntrega/{{ entrega.idEntrega }}">Eliminar</a>
+                		 	   
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+               
+            </div>
+        </div>
+       
 {% else %}
 
 <div class="row">
