@@ -8,7 +8,7 @@
 	<form class="form-group" role="form" action="/newEntrega/{{listaEntregas[0].idComic.idComic}}"
 		method="get">
 		<hr />
-		<button class="btn btn-primary">Crear Entrega</button>
+		<button class="btn btn-dark">Crear Entrega</button>
 		<hr />
 	</form>
 </div>
@@ -17,7 +17,7 @@
 	<form class="form-group" role="form" action="/newEntrega/{{ comicID }}"
 		method="get">
 		<hr />
-		<button class="btn btn-primary">Crear Entrega</button>
+		<button class="btn btn-dark">Crear Entrega</button>
 		<hr />
 	</form>
 </div>
@@ -40,7 +40,7 @@
 								placeholder="fecha">
 						</div>
 						<div class="input-group-append">
-							<button type="submit" value="submit" class="btn btn-primary">Buscar
+							<button type="submit" value="submit" class="btn btn-dark">Buscar
 								por Fecha Mayor que</button>
 						</div>
 					</form>
@@ -55,14 +55,14 @@
 			<form class="form-horizontal" role="form"
 				action="/ordenFechaEntrega/{{ listaEntregas[0].idComic.idComic }}"
 				method="get">
-				<button class="btn btn-primary">Ordena por Antig&uuml;edad
+				<button class="btn btn-dark">Ordena por Antig&uuml;edad
 				</button>
 			</form>
 			<span style="margin-right: 10px;"></span>
 			<form class="form-horizontal" role="form"
 				action="/ordenNombreInverso/{{listaEntregas[0].idComic.idComic}}"
 				method="get">
-				<button class="btn btn-primary">Orden Nombre Inverso</button>
+				<button class="btn btn-dark">Orden Nombre Inverso</button>
 			</form>
 		</div>
 
@@ -93,10 +93,8 @@
                         <div class="box-content">
                             <h4 class="title">{{ entrega.nombre }}</h4>
                             <p class="description">  {{entrega.fechaCreacion[:10]}}</p>
-                           
-                            <a class="edit" href="/editarComic/{{ entrega.idComic }}">Editar </a>
+                            <a class="edit" href="/editarEntrega/{{ entrega.idEntrega }}">Editar </a>
                 		 	    <a class="delete" href ="/deleteEntrega/{{ entrega.idEntrega }}">Eliminar</a>
-                		 	   
                         </div>
                     </div>
                 </div>
@@ -106,79 +104,5 @@
         </div>
        
 
-<!--
-    <span style="margin-left: 5px;" class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
-</a>
-<br/>
-<br/>
-
-{% if listaEntregas|length > 0 %}
-<div class="row">
-    <div class="col-md-2"></div>
-    <div class="col-md-8">
-        <form class="form-horizontal" role="form" action="/ordenFechaEntrega/{{ listaEntregas[0].idComic.idComic }}" method="get">
-
-                        <button class="btn btn-warning">Ordena por Antig&uuml;edad </button><hr/>
-                    </form>
-
-                    <form class="form-horizontal" role="form" action="/buscarFechaMayor/{{listaEntregas[0].idComic.idComic}}" method="get">
-                <div class="col-sm-6">
-                    <input type="date" class="form-control" name="busquedaFechaMayorEntrega" id="busquedaFechaMayorEntrega"
-                           placeholder="fecha">
-                </div>
-                <button type="submit" value="submit" class="btn btn-warning" >Buscar por Fecha Mayor que</button>
-</form>
-
-                        <form class="form-horizontal" role="form" action="/ordenNombreInverso/{{listaEntregas[0].idComic.idComic}}" method="get">
-                        <button class="btn btn-warning">Orden Nombre Inverso </button>
-                                </form>
-
-      
-	   
-</div>
- <div class="container mt-40 mb-30">
-            <div class="row mt-30">
-            {% for entrega in listaEntregas %}
-                <div class="col-md-4 col-sm-6">
-                    <div class="box21">
-                        <img src="{{ entrega.archivo }}" alt="" height="4" width="4">
-                        <div class="box-content">
-                            <h4 class="title">{{ entrega.nombre }}</h4>
-                            <p class="description">  {{entrega.fechaCreacion[:10]}}</p>
-                          
-                            <a class="edit" href="/editarEntrega/{{ entrega.idComic }}">Editar </a>
-                		 	    <a class="delete" href ="/deleteEntrega/{{ entrega.idEntrega }}">Eliminar</a>
-                		 	   
-                        </div>
-                    </div>
-                </div>
-                {% endfor %}
-               
-            </div>
-        </div>
-       
-{% else %}
-
-<div class="row">
-    <div class="col-lg-12 text-center">
-        <div class="col-md-3"></div>
-        <div class="col-md-6 bg-warning warning_mesagge">
-            <label>No existen entregas todav&iacute;a.</label>
-        </div>
-        <div class="col-md-3"></div>
-
-    </div>
-</div>
-
-{% endif %}
-
-        <script type="text/javascript">
-            window.onload = function() {
-                if(!window.location.hash) {
-                    window.location = window.location + '#loaded';
-                    window.location.reload();
-                }
-            }
-        </script>  -->
 
 {% endblock content %}

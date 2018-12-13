@@ -12,10 +12,22 @@
 			<div class="col-md-6">
 				<button class="btn btn-dark">Crear Comic</button>
 			</div>
-			<div class="col-md-6 text-right">
-				<p>Usuario normal</p>
-			</div>
+			</form>
+			<div class="col-md-6 text-right ">
+			<div class="titulo">
+				<h1 style="color:#ffffff;text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black">Usuario Estándar	
+		<form class="form-group" role="form" action="/premium" method="get">	
+		<button class="btn btn-dark"
+			title="Podrá convertirse en premium haciendo click">Premium</button>
+		</h1>
+			</form>
+	</div>
+
+</div>
+
+
 		</div>
+			
 		<hr />
 	</form>
 	{% elif permiso==2%}
@@ -27,7 +39,9 @@
 				<button class="btn btn-dark">Crear Comic</button>
 			</div>
 			<div class="col-md-6 text-right">
-				<p>Usuario premium</p>
+				<div class="titulo">
+				<h1>Usuario premium</h1>
+				</div>
 			</div>
 		</div>
 		<hr />
@@ -41,7 +55,9 @@
 				<button class="btn btn-dark" disabled>Crear Comic</button>
 			</div>
 			<div class="col-md-6 text-right">
-				<p>Invitado</p>
+				<div class="titulo">
+				<h1>Usuario invitado</h1>
+				</div>
 			</div>
 		</div>
 		<hr />
@@ -56,18 +72,7 @@
 	<button type="submit" value="submit" class="btn btn-dark">Buscar nuevas ideas</button>
 </form>
 
-{% if permiso==1 %}
-<div class="container align-items-center">
-	<form class="form-group" role="form" action="/premium" method="get">
-		<hr />
-		<button class="btn btn-dark"
-			title="Podrá convertirse en premium haciendo click">Premium</button>
-		<hr />
-	</form>
-</div>
-{% endif %}
 
-<!-- margen   <span style="margin-left: 5px;" class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> -->
 <div class="container align-items-center">
 	<div
 		class="d-flex justify-content-center align-items-center pt-3 pb-2 mb-3 border-bottom">
