@@ -141,12 +141,12 @@
             {% for entrega in listaEntregas %}
                 <div class="col-md-4 col-sm-6">
                     <div class="box21">
-                        <img src="{{ entrega.archivo }}" alt="">
+                        <img src="{{ entrega.archivo }}" alt="" height="4" width="4">
                         <div class="box-content">
                             <h4 class="title">{{ entrega.nombre }}</h4>
                             <p class="description">  {{entrega.fechaCreacion[:10]}}</p>
-                           
-                            <a class="edit" href="/editarComic/{{ entrega.idComic }}">Editar </a>
+                          
+                            <a class="edit" href="/editarEntrega/{{ entrega.idComic }}">Editar </a>
                 		 	    <a class="delete" href ="/deleteEntrega/{{ entrega.idEntrega }}">Eliminar</a>
                 		 	   
                         </div>
