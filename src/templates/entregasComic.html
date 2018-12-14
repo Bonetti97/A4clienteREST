@@ -6,8 +6,6 @@
 <hr />
 {% if listaEntregas |length > 0 %}
 <div class="container align-items-center">
-	
-	
 	<form class="form-group" role="form" action="/newEntrega/{{listaEntregas[0].idComic.idComic}}" method="get">
 				<div class="btn-float">
 				 <button class="btn btn-default btn-circle btn-xl btn-lateral" title="Crear comic"><span>+</span></button>
@@ -19,7 +17,7 @@
 </div>
 {% else %}
 <div class="container align-items-center">
-	<form class="form-group" role="form" action="/newEntrega/{{listaEntregas[0].idComic.idComic}}" method="get">
+	<form class="form-group" role="form" action="/newEntrega/{{ comicID }}" method="get">
 				<div class="btn-float">
 				 <button class="btn btn-default btn-circle btn-xl btn-lateral" title="Crear comic"><span>+</span></button>
 				 </div>
