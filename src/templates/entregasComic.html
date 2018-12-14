@@ -2,6 +2,7 @@
 <div class="titulo">
 <h1>Entregas</h1>
 </div>
+
 <hr />
 {% if listaEntregas |length > 0 %}
 <div class="container align-items-center">
@@ -10,6 +11,9 @@
 		<hr />
 		<button class="btn btn-dark">Crear Entrega</button>
 		<hr />
+	</form>
+	<form action="/showComics">
+		<button class="botonBack">&laquo; Ver Comics</button>
 	</form>
 </div>
 {% else %}

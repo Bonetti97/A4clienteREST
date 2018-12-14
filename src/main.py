@@ -8,7 +8,7 @@ import viewsEntrega
 app = webapp2.WSGIApplication([
         ('/',views.login),
         ('/guardarSesion/([\d]+)',views.guardarSesion),
-        ('/showComics/([\d]+)',views.showComics), 
+        ('/showComics',views.showComics), 
         ('/newComic',views.AddComic), 
         ('/editarComic/([\d]+)', views.EditComic),
         ('/delete/([\d]+)', views.DeleteComic),
@@ -26,8 +26,7 @@ app = webapp2.WSGIApplication([
         ('/ordenNombreInverso/([\d]+)', viewsEntrega.OrdenNombreInverso),
         ('/invitado', views.invitado),
         ('/premium', views.premium),
-        ('/splashApii',views.splashApi),
-        ('/flickr',views.flickr),
+        ('/flickr',views.flickr)
         ],
         debug=True)
 

@@ -40,7 +40,7 @@ class premium(BaseHandler):
 class guardarSesion(BaseHandler):
     def get(self,idUsuario):
         #Controller().login(idUsuario)
-        return webapp2.redirect("/showComics/"+idUsuario);
+        return webapp2.redirect("/showComics");
         
 class invitado(BaseHandler):
     def get(self):   
@@ -48,10 +48,9 @@ class invitado(BaseHandler):
         self.render_template('invitado.html', {'listaComic': cos})
         
 class showComics(BaseHandler):
-    def get(self,idUsuario): 
+    def get(self): 
         o = Controller().login()  
-        cos = Controller().listComics(o) 
-      
+        cos = Controller().listComics(o)      
         u = Controller().findUsuario(o)
         
         self.render_template('comics.html', {'listaComic': cos , "permiso" : u.permiso })     
@@ -64,7 +63,7 @@ class AddComic(BaseHandler):
         Controller().addComic(self.request.get('nombreComic'), 
                               self.request.get('descripcionComic'))
         id = Controller().login()
-        return webapp2.redirect('/showComics/'+id )
+        return webapp2.redirect('/showComics' )
         
 class EditComic(BaseHandler):
     def get(self, comicID):      
@@ -75,14 +74,14 @@ class EditComic(BaseHandler):
         nombre = self.request.get('nombreComic')
         descripcion = self.request.get('descripcionComic')
         Controller().editComic(comicID, nombre, descripcion)
-        o = Controller().login()
-        return webapp2.redirect('/showComics/'+o)
+        #o = Controller().login()
+        return webapp2.redirect('/showComics')
 
 class DeleteComic(BaseHandler):
     def get(self, comicID):
         Controller().deleteComic(comicID)
-        id = Controller().login()
-        return webapp2.redirect('/showComics/'+id)
+        #id = Controller().login()
+        return webapp2.redirect('/showComics')
     
 class OrdenAlfabetico(BaseHandler):
     def get(self):
@@ -122,17 +121,12 @@ class OrdenEntregas(BaseHandler):
         u = Controller().findUsuario(o)
         self.render_template('comics.html', {'listaComic': cos , "permiso" : u.permiso })
 
-class splashApi(BaseHandler):
-    def get(self):
-        nombre = self.request.get('nombreApi')
-        urlImagen= Controller().splashApi(nombre)
-        self.render_template('prueba.html',{'imagen': urlImagen})
 
 class flickr(BaseHandler):
     def get(self):
         tag = self.request.get('nombreApi')
         lista = Controller().flickr(tag)
-        self.render_template('prueba.html', {'lista': lista})        
+        self.render_template('flickr.html', {'lista': lista})        
         
         
         
