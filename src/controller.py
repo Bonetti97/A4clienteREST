@@ -110,7 +110,6 @@ class Controller(object):
         aux=[]
         lista=requests.get(service+'ordenaComicEntrega')
         lista=json.loads(lista.text)
-        print lista
         for i in range(len(lista)):
             comi = comic.Comic(lista[i]['idComic'],lista[i]['nombre'],lista[i]['descripcion'],lista[i]['fechaCreacion'])
             fec = ((comi.fechaCreacion).encode('ascii','ignore'))[:10]
