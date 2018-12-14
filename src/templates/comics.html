@@ -1,4 +1,5 @@
  {% extends "base.html" %} {% block content %}
+ 
 <div class="titulo">
 	<h1>Comics</h1>
 </div>
@@ -16,7 +17,9 @@
 			</form>
 			</div>
 			<form class="form-group" role="form" action="/newComic" method="get">
-				<button class="botonF1"><span>+</span></button>
+				<div class="btn-float">
+				 <button class="btn btn-default btn-circle btn-xl btn-lateral" title="Crear comic"><span>+</span></button>
+				 </div>
 			</form>
 			</div>	
 			<div class="col-md-6 text-right ">
@@ -47,7 +50,9 @@
 			</form>
 			</div>
 			<form class="form-group" role="form" action="/newComic" method="get">
-				<button class="botonF1"><span>+</span></button>
+				<div class="btn-float">
+				 <button class="btn btn-default btn-circle btn-xl btn-lateral" title="Crear comic"><span>+</span></button>
+				 </div>
 			</form>
 			</div>	
 			<div class="col-md-6 text-right">
@@ -68,8 +73,10 @@
 				<button type="submit" value="submit" class="btn btn-dark">Buscar nuevas ideas</button>
 			</form>
 			</div>
-			<form class="form-group" role="form" action="/newComic" method="get">
-				<button class="botonF1" disabled><span>+</span></button>
+				<form class="form-group" role="form" action="/newComic" method="get">
+				<div class="btn-float">
+				 <button class="btn btn-default btn-circle btn-xl btn-lateral" title="Crear comic" disabled><span>+</span></button>
+				 </div>
 			</form>
 			</div>	
 			<div class="col-md-6 text-right">
@@ -138,7 +145,7 @@
 		</div>
 		{% if listaComic|length > 0 %}
 		<div class="table-resposive">
-			<table class="table table-dark">
+			<table class="table table-dark" style="border-radius: 20px;">
 				<thead class="thead-dark">
 					<tr>
 						<th scope="col">Nombre</th>
